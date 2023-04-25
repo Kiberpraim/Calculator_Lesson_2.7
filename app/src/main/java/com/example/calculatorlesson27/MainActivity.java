@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPercentClick(View view) {
         textView.setText(Double.toString(Double.valueOf(textView.getText().toString()) * 0.01));
+        dotClicked = true;
     }
 
     public void onPlusMinusClick(View view) {
