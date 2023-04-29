@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.TextView);
     }
-
-
+    
     public void onNumberClick(View view) {
         if (textView.getText().toString().equals("0")||isOperationClick){
             textView.setText(((Button)view).getText());
@@ -79,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(result.toString());
         }
         isEqualDoubleClick = true;
+        if( result % 1 == 0 ){
         dotClicked = false;
+        }
     }
 
     public void onPercentClick(View view) {
