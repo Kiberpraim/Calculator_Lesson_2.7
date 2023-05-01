@@ -11,14 +11,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView textView;
-    public Double first =0.0, second = 0.0, result = 0.0;
+    private TextView textView;
+    private Double first =0.0, second = 0.0, result = 0.0;
     private Boolean isOperationClick = false;
     private Boolean isEqualDoubleClick = false;
     private String operationClicked = ".";
     private Boolean dotClicked = false;
     private Button nextActivity;
-    private String text = "key";
+    public static String KEY = "key";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
         dotClicked = false;
 
         nextActivity.setVisibility(View.VISIBLE);
-
-
-            text = String.valueOf(textView);
         }
     }
 
@@ -130,8 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextActivity(View view) {
         Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
-        text = String.valueOf(textView);
-        intent.putExtra("key", text);
+        intent.putExtra(KEY, textView.getText().toString());
         startActivity(intent);
     }
 

@@ -29,8 +29,9 @@ public class NavigationActivity extends AppCompatActivity {
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         TextView textView = findViewById(R.id.tx_current_policies);
-        textView.setText(MainActivity.textView.getText().toString());
+        textView.setText(getIntent().getStringExtra(MainActivity.KEY));
 
         setSupportActionBar(binding.appBarNavigation.toolbar);
         binding.appBarNavigation.fab.setOnClickListener(new View.OnClickListener() {
