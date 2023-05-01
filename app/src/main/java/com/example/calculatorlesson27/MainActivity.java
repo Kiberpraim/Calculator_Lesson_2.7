@@ -2,6 +2,7 @@ package com.example.calculatorlesson27;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,19 +11,21 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
-    private Double first =0.0, second = 0.0, result = 0.0;
+    public static TextView textView;
+    public Double first =0.0, second = 0.0, result = 0.0;
     private Boolean isOperationClick = false;
     private Boolean isEqualDoubleClick = false;
     private String operationClicked = ".";
     private Boolean dotClicked = false;
-
+    private Button nextActivity;
+    private String text = "key";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         textView = findViewById(R.id.TextView);
+        nextActivity = findViewById(R.id.btn_next_activity);
     }
     
     public void onNumberClick(View view) {
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             textView.append(((Button)view).getText());
         }
         isOperationClick = false;
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
 
     public void clickClear(View view) {
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         first = 0.;
         second = 0.;
         dotClicked = false;
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
 
     public void onOperationClick(View view) {
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         isOperationClick = true;
         isEqualDoubleClick = false;
         dotClicked = false;
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
 
     public void onEquallyClick(View view) {
@@ -77,15 +86,24 @@ public class MainActivity extends AppCompatActivity {
         }else {
         textView.setText(result.toString());
         }
+
         isEqualDoubleClick = true;
+
         if( result % 1 == 0 ){
         dotClicked = false;
+
+        nextActivity.setVisibility(View.VISIBLE);
+
+
+            text = String.valueOf(textView);
         }
     }
 
     public void onPercentClick(View view) {
         textView.setText(Double.toString(Double.valueOf(textView.getText().toString()) * 0.01));
         dotClicked = true;
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
 
     public void onPlusMinusClick(View view) {
@@ -97,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
 
     public void onDotClick(View view) {
@@ -104,5 +124,15 @@ public class MainActivity extends AppCompatActivity {
             textView.append(".");
             dotClicked = true;
         }
+
+        nextActivity.setVisibility(View.INVISIBLE);
     }
+
+    public void nextActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+        text = String.valueOf(textView);
+        intent.putExtra("key", text);
+        startActivity(intent);
+    }
+
 }
